@@ -4,8 +4,15 @@ from langgraph.graph import START, END, StateGraph
 from langgraph.graph.messages import add_messages
 from langgraph.checkpoint.memory import InMemorySaver
 from langchain_ollama import ChatOllama
+from colorama import Fore
+
 # 2. Create LLM
+llm = ChatOllama(
+     model="llama3.2",
+    temperature=0
+)
 # 3. Create State
+
 # 4. Build LLM Mode
 # 5. Assemble Graph
 # 6. Add Memory and Compile Graph
