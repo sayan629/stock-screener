@@ -33,6 +33,10 @@ memory_saver = InMemorySaver()
 graph = graph_builder.compile(checkpointer=memory_saver)
 
 # 7. Build call loop and run it
+if __name__ == "__main__":
+    while True:
+        prompt = input(Fore.GREEN + "🤖 You: " + Fore.RESET)
+        res = graph.invoke({})
 # 8. Create tool - DONE
 # 9. Build LLM with tools
 # 10. Create Tool Node
