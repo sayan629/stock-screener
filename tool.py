@@ -31,3 +31,15 @@ def simple_screener(screen_type: str, offset: int) -> str:
 
     query = yf.PREDEFINED_SCREENER_QUERIES[screen_type]['query']
     res = yf.screen(query, offset=offset, count=5)
+    
+    with open('output.json', 'w') as f: 
+          json.dump(res, f) 
+     
+    fields = ["shortName","bid","ask","exchange", "fiftyTwoWeekHigh", "fiftyTwoWeekLow", "averageAnalystRating", "dividendYield", "symbol"] 
+    output_data = []
+    for stock_detail in res['quotes']: 
+          details = {}
+          for key, val in stock_detail.items(): 
+               if key in fields: 
+                    details[key] = val 
+          output_data.append(details)
