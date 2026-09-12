@@ -6,6 +6,8 @@ from langgraph.checkpoint.memory import InMemorySaver
 from langchain_ollama import ChatOllama
 from colorama import Fore
 
+from langgraph.prebuilt import ToolNode
+
 # 2. Create LLM
 llm = ChatOllama(
      model="llama3.2",
@@ -39,7 +41,9 @@ if __name__ == "__main__":
         res = graph.invoke({"messages": [{"role": "user", "content": prompt}]}, config = 
                            {"configurable":{"thread_id":1234}})
         print(Fore.LIGHTYELLOW_EX + res['messages'][-1].content + Fore.RESET)
-# 8. Create tool - DONE
+
+# 8. Create tool 
+
 # 9. Build LLM with tools
 # 10. Create Tool Node
 # 11. Create Router Node
