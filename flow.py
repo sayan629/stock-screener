@@ -12,7 +12,9 @@ llm = ChatOllama(
     temperature=0
 )
 # 3. Create State
-
+class State(dict):
+    messages: Annotated[list, add_messages] = []
+    
 # 4. Build LLM Mode
 # 5. Assemble Graph
 # 6. Add Memory and Compile Graph
