@@ -1,7 +1,7 @@
 # 1. Bring in dependencies
 from typing import Annotated
 from langgraph.graph import START, END, StateGraph
-from langgraph.graph.messages import add_messages
+from langgraph.graph.message import add_messages
 from langgraph.checkpoint.memory import InMemorySaver
 from langchain_ollama import ChatOllama
 from colorama import Fore
@@ -36,7 +36,8 @@ graph = graph_builder.compile(checkpointer=memory_saver)
 if __name__ == "__main__":
     while True:
         prompt = input(Fore.GREEN + "🤖 You: " + Fore.RESET)
-        res = graph.invoke({"messages": [{"role": "user", "content": prompt}]})
+        res = graph.invoke({"messages": [{"role": "user", "content": prompt}]}, config = 
+                           {"configurable":{"thread_id":1234}})
         print(Fore.LIGHTYELLOW_EX + res['messages'][-1].content + Fore.RESET)
 # 8. Create tool - DONE
 # 9. Build LLM with tools
