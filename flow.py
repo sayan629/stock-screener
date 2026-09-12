@@ -27,7 +27,11 @@ graph_builder = StateGraph(State)
 graph_builder.add_node("chatbot", chatbot)
 graph_builder.add_edge(START, "chatbot")
 graph_builder.add_edge("chatbot", END)
+
 # 6. Add Memory and Compile Graph
+memory_saver = InMemorySaver()
+graph = graph_builder.compile(checkpointer=memory_saver)
+
 # 7. Build call loop and run it
 # 8. Create tool - DONE
 # 9. Build LLM with tools
