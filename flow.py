@@ -23,7 +23,10 @@ def chatbot(state: State):
     }
     
 # 5. Assemble Graph
-graph_builder = State
+graph_builder = StateGraph(State)
+graph_builder.add_node("chatbot", chatbot)
+graph_builder.add_edge(START, "chatbot")
+graph_builder.add_edge("chatbot", END)
 # 6. Add Memory and Compile Graph
 # 7. Build call loop and run it
 # 8. Create tool - DONE
