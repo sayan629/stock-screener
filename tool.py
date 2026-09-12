@@ -43,3 +43,6 @@ def simple_screener(screen_type: str, offset: int) -> str:
                if key in fields: 
                     details[key] = val 
           output_data.append(details)
+    
+    return f"Stock Screener Results: {output_data}"   
+          
