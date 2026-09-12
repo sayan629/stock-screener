@@ -13,9 +13,14 @@ llm = ChatOllama(
 )
 # 3. Create State
 class State(dict):
-    messages: Annotated[list, add_messages] = []
+    messages: Annotated[list, add_messages] 
     
 # 4. Build LLM Mode
+
+def chatbot(state: State):
+    return {
+        "messages": [llm.invoke(state["messages"])]
+    }
 # 5. Assemble Graph
 # 6. Add Memory and Compile Graph
 # 7. Build call loop and run it
