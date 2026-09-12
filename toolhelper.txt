@@ -1,0 +1,52 @@
+"""
+Returns screened assets (stocks, funds, bonds) given popular criteria.
+
+Args:
+    screen_type: One of a default set of stock screener queries from Yahoo Finance.
+        aggressive_small_caps
+        day_gainers
+        day_losers
+        growth_technology_stocks
+        most_actives
+        most_shorted_stocks
+        small_cap_gainers
+        undervalued_growth_stocks
+        undervalued_large_caps
+        conservative_foreign_funds
+        high_yield_bond
+        portfolio_anchors
+        solid_large_growth_funds
+        solid_midcap_growth_funds
+        top_mutual_funds
+
+Returns:
+    A JSON output of assets that meet the criteria.
+"""
+
+fields = [
+    "shortName",
+    "bid",
+    "ask",
+    "exchange",
+    "fiftyTwoWeekHigh",
+    "fiftyTwoWeekLow",
+    "averageAnalystRating",
+    "dividendYield",
+    "symbol"
+]
+
+output_data = []
+
+for stock_detail in res.get("quotes", []):
+    details = {
+        key: stock_detail[key]
+        for key in fields
+        if key in stock_detail
+    }
+    output_data.append(details)
+
+# Save only the filtered data
+with open("output.json", "w") as f:
+    json.dump(output_data, f, indent=4)
+
+return output_data
