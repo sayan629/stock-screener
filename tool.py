@@ -44,5 +44,13 @@ def simple_screener(screen_type: str, offset: int) -> str:
                     details[key] = val 
           output_data.append(details)
     
-    return f"Stock Screener Results: {output_data}"   
+    return f"Stock Screener Results: {output_data}"  
+
+
+if __name__ == "__main__":
+    print(simple_screener.invoke({
+        "screen_type":"day_gainers",
+        "offset":0
+    }))
+     
           
