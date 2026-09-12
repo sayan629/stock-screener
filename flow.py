@@ -21,7 +21,9 @@ def chatbot(state: State):
     return {
         "messages": [llm.invoke(state["messages"])]
     }
+    
 # 5. Assemble Graph
+graph_builder = State
 # 6. Add Memory and Compile Graph
 # 7. Build call loop and run it
 # 8. Create tool - DONE
