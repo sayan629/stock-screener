@@ -1,4 +1,9 @@
 # 1. Bring in dependencies
+from typing import Annotated
+from langgraph.graph import START, END, StateGraph
+from langgraph.graph.messages import add_messages
+from langgraph.checkpoint.memory import InMemorySaver
+from langchain_ollama import ChatOllama
 # 2. Create LLM
 # 3. Create State
 # 4. Build LLM Mode
