@@ -19,7 +19,7 @@ tools = [simple_screener]
 tool_node = ToolNode(tools)
 
 # 9. Build LLM with tools
-llm = 
+llm_with_tools = llm.bind_tools(tools)
 
 # 10. Create Tool Node
 
