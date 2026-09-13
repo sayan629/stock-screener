@@ -16,12 +16,12 @@ llm = ChatOllama(
 
 # 8. Create tool 
 tools = [simple_screener]
-tool_node = ToolNode(tools)
 
 # 9. Build LLM with tools
 llm_with_tools = llm.bind_tools(tools)
 
 # 10. Create Tool Node
+tool_node = ToolNode(tools)
 
 # 3. Create State
 class State(dict):
@@ -31,7 +31,7 @@ class State(dict):
 
 def chatbot(state: State):
     return {
-        "messages": [llm.invoke(state["messages"])]
+        "messages": [llm_with_tools.invoke(state["messages"])]
     }
     
 # 5. Assemble Graph
