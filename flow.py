@@ -23,6 +23,7 @@ llm_with_tools = llm.bind_tools(tools)
 # 10. Create Tool Node
 tool_node = ToolNode(tools)
 
+
 # 3. Create State
 class State(dict):
     messages: Annotated[list, add_messages] 
@@ -33,12 +34,25 @@ def chatbot(state: State):
     return {
         "messages": [llm_with_tools.invoke(state["messages"])]
     }
-    
+
+# 11. Create Router Node
+def router(state: State):
+    last_message = state["messages"][-1]
+    if hasattr(last_message, "tool_calls") and last_message.tool_calls:
+        return "tools"
+    else:
+        return END
+
 # 5. Assemble Graph
 graph_builder = StateGraph(State)
 graph_builder.add_node("chatbot", chatbot)
+graph_builder.add_node("tools", tool_node)
 graph_builder.add_edge(START, "chatbot")
-graph_builder.add_edge("chatbot", END)
+
+# 12. Update graph for Tools
+graph_builder.add_edge("tools", "chatbot")
+graph_builder.add_conditional_edges("chatbot", router)
+
 
 # 6. Add Memory and Compile Graph
 memory_saver = InMemorySaver()
@@ -53,8 +67,3 @@ if __name__ == "__main__":
         print(Fore.LIGHTYELLOW_EX + res['messages'][-1].content + Fore.RESET)
 
 
-
-
-# 11. Create Router Node
-# 12. Update graph for Tools
-print("Graph initialized with tools.")

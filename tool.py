@@ -44,7 +44,7 @@ def simple_screener(screen_type: str, offset: int) -> str:
                     details[key] = val 
           output_data.append(details)
     
-    return f"Stock Screener Results: {output_data}"  
+    return json.dumps(output_data, indent=2) 
 
 
 if __name__ == "__main__":
