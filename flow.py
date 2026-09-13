@@ -5,14 +5,24 @@ from langgraph.graph.message import add_messages
 from langgraph.checkpoint.memory import InMemorySaver
 from langchain_ollama import ChatOllama
 from colorama import Fore
-
 from langgraph.prebuilt import ToolNode
+from tool import simple_screener
 
 # 2. Create LLM
 llm = ChatOllama(
      model="llama3.2",
     temperature=0
 )
+
+# 8. Create tool 
+tools = [simple_screener]
+tool_node = ToolNode(tools)
+
+# 9. Build LLM with tools
+llm = 
+
+# 10. Create Tool Node
+
 # 3. Create State
 class State(dict):
     messages: Annotated[list, add_messages] 
@@ -42,10 +52,9 @@ if __name__ == "__main__":
                            {"configurable":{"thread_id":1234}})
         print(Fore.LIGHTYELLOW_EX + res['messages'][-1].content + Fore.RESET)
 
-# 8. Create tool 
 
-# 9. Build LLM with tools
-# 10. Create Tool Node
+
+
 # 11. Create Router Node
 # 12. Update graph for Tools
 print("Graph initialized with tools.")
